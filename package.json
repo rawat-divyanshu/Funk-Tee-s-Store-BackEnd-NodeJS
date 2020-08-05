@@ -1,0 +1,20 @@
+{
+  "name": "projebackendnew",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production index",
+    "dev": "nodemon index"
+  },
+  "author": "Divyanshu Rawat",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.19",
+    "mongoose": "^5.9.27",
+    "nodemon": "^2.0.4",
+    "uuid": "^8.3.0"
+  }
+}
