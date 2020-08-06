@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const categorySchema = new Schema(
+var categorySchema = new Schema(
   {
     name: {
       type: String,
@@ -9,6 +9,10 @@ const categorySchema = new Schema(
       required: true,
       maxlength: 32,
       unique: true,
+    },
+    avatar: {
+      type: Buffer,
+      contentType: String,
     },
   },
   { timestamps: true }

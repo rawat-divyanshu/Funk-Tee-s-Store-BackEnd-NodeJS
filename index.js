@@ -1,11 +1,40 @@
 const express = require("express");
+const router = express.Router();
+
 const dotenv = require("dotenv");
+
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
+const mongoose = require("mongoose");
+
+// Importing Routes
+const auth = require("./routes/auth");
 
 // Importing Configuration Variables
 dotenv.config({ path: "./config/config.env" });
 
 // Initializing Server
 const app = express();
+
+// Connecting to DB
+mongoose
+  .connect(process.env.DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log("DB CONNECTED");
+  });
+
+// Middlewares
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
+
+app.use("/api", auth);
 
 // PORT on which the Server will be Running.
 const PORT = process.env.PORT || 5000;
@@ -14,6 +43,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(
   PORT,
   console.log(
-    `Server is running in ${process.env.NODE_ENV} enviornment at PORT ${PORT}`
+    `SERVER IS RUNNING IN ${process.env.NODE_ENV} ENVIORNMENT AT PORT ${PORT}`
   )
 );

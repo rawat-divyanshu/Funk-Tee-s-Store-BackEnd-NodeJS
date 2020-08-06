@@ -6,16 +6,10 @@ const { v4: uuidv4 } = require("uuid");
 
 var userSchema = new Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
       required: true,
-      maxlength: 30,
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      maxlength: 30,
+      maxlength: 50,
       trim: true,
     },
     emailId: {
@@ -36,6 +30,10 @@ var userSchema = new Schema(
     purchases: {
       type: Array,
       default: [],
+    },
+    avatar: {
+      type: Buffer,
+      contentType: String,
     },
   },
   { timestamps: true }
