@@ -5,7 +5,10 @@ const { ObjectId } = mongoose.Schema;
 
 var orderSchema = new mongoose.Schema(
   {
-    products: [Cart],
+    products: {
+      type: [ObjectId],
+      ref: "Cart",
+    },
     transactionId: {},
     amount: {
       type: Number,

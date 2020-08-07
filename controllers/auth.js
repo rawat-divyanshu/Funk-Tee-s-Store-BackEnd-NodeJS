@@ -5,7 +5,7 @@ const { validationResult } = require("express-validator");
 var expressJwt = require("express-jwt");
 var jwt = require("jsonwebtoken");
 
-// Signup Middleware
+// Signup
 exports.signup = (req, res) => {
   // Validation check errors
   const errors = validationResult(req);
@@ -31,7 +31,7 @@ exports.signup = (req, res) => {
   });
 };
 
-// Login Middleware
+// Login
 exports.signin = (req, res) => {
   // Validation check errors
   const errors = validationResult(req);
@@ -64,9 +64,35 @@ exports.signin = (req, res) => {
   });
 };
 
+// Signout
 exports.signout = (req, res) => {
   res.clearCookie("token");
   res.json({
     messgae: "User Signed Out Successfully.",
   });
+};
+
+exports.isSignedIn = expressJwt({
+  secret: process.env.SECRET || "funkteesstore",
+  userProperty: "auth",
+  algorithms: ["HS256"],
+});
+
+exports.isAuthenticated = (req, res, next) => {
+  let checker = req.profile && req.auth && req.profile._id == req.auth._id;
+  if (!checker) {
+    return res.status(403).json({
+      error: "ACCESS DENIED",
+    });
+  }
+  next();
+};
+
+exports.isAdmin = (req, res, next) => {
+  if (req.profile.role !== 1) {
+    return res.status(403).json({
+      error: "ADMIN PRIVILEGES REQUIRED",
+    });
+  }
+  next();
 };
