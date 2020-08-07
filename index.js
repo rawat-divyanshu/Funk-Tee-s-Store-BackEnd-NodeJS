@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 // Importing Routes
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const categoryRoutes = require("./routes/category");
 
 // Importing Configuration Variables
 dotenv.config({ path: "./config/config.env" });
@@ -37,6 +38,7 @@ app.use(cors());
 
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", categoryRoutes);
 
 // PORT on which the Server will be Running.
 const PORT = process.env.PORT || 5000;
