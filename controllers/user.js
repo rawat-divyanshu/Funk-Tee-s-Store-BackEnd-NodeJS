@@ -56,31 +56,31 @@ exports.userPurchaseList = (req, res) => {
     });
 };
 
-// exports.pushOrderInPurchaseList = (req, res, next) => {
-//   let purchases = [];
-//   req.body.order.products.forEach((product) => {
-//     purchases.push({
-//       _id: product._id,
-//       name: product.name,
-//       description: product.description,
-//       category: product.category,
-//       quantity: product.quantity,
-//       amount: req.body.order.amount,
-//       transactionId: req.body.order.transactionId,
-//     });
-//   });
+exports.pushOrderInPurchaseList = (req, res, next) => {
+  let purchases = [];
+  req.body.order.products.forEach((product) => {
+    purchases.push({
+      _id: product._id,
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      quantity: product.quantity,
+      amount: req.body.order.amount,
+      transactionId: req.body.order.transactionId,
+    });
+  });
 
-//   User.findOneAndUpdate(
-//     { _id: req.profile._id },
-//     { $push: { purchases: purchases } },
-//     { new: true },
-//     (err, purchaseList) => {
-//       if (err) {
-//         return res.status(400).json({
-//           error: "ERROR IN UPDATING PURCHASE LIST",
-//         });
-//       }
-//       next();
-//     }
-//   );
-// };
+  User.findOneAndUpdate(
+    { _id: req.profile._id },
+    { $push: { purchases: purchases } },
+    { new: true },
+    (err, purchaseList) => {
+      if (err) {
+        return res.status(400).json({
+          error: "ERROR IN UPDATING PURCHASE LIST",
+        });
+      }
+      next();
+    }
+  );
+};

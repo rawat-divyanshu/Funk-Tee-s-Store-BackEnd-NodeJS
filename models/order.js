@@ -19,6 +19,11 @@ var orderSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User",
     },
+    status: {
+      type: String,
+      default: "Received",
+      enum: ["Cancelled", "Processing", "Delievered", "Shipped", "Received"],
+    },
   },
   { timestamps: true }
 );

@@ -14,6 +14,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
+const orderRoutes = require("./routes/order");
 
 // Importing Configuration Variables
 dotenv.config({ path: "./config/config.env" });
@@ -41,6 +42,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", orderRoutes);
 
 // PORT on which the Server will be Running.
 const PORT = process.env.PORT || 5000;
