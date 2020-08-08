@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-
 const { ObjectId } = mongoose.Schema;
 
-var productSchema = new mongoose.Schema(
+const productSchmea = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -17,9 +16,10 @@ var productSchema = new mongoose.Schema(
       maxlength: 2000,
     },
     price: {
-      type: Nuumber,
+      type: Number,
       required: true,
       maxlength: 32,
+      trim: true,
     },
     category: {
       type: ObjectId,
@@ -34,11 +34,11 @@ var productSchema = new mongoose.Schema(
       default: 0,
     },
     photo: {
-      type: Buffer,
+      data: Buffer,
       contentType: String,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Product", productSchema);
+module.exports = mongoose.model("Product", productSchmea);
